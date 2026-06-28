@@ -8,7 +8,7 @@ This project provides a modular backend that:
 
 - Uploads and processes PDF/TXT documents
 - Stores document metadata in PostgreSQL
-- Generates embeddings with Sentence Transformers
+- Generates embeddings with Gemini (`gemini-embedding-2`)
 - Uses Qdrant for vector similarity search
 - Uses Redis for chat memory by `session_id`
 - Runs a custom RAG pipeline (without RetrievalQAChain)
@@ -30,7 +30,7 @@ This project provides a modular backend that:
    - Query is embedded
    - Top matching chunks are retrieved from Qdrant
    - Prompt is built manually
-   - Prompt is sent to OpenAI for final answer
+  - Prompt is sent to Gemini for final answer
    - Response and booking extraction JSON are returned
    - Conversation turns are persisted in Redis
 
@@ -47,9 +47,9 @@ This project provides a modular backend that:
 - **Database:** PostgreSQL
 - **Cache / Memory:** Redis
 - **Vector DB:** Qdrant
-- **Embeddings:** sentence-transformers (`all-MiniLM-L6-v2`)
+- **Embeddings:** Gemini (`gemini-embedding-2`)
 - **File Parsing:** pypdf
-- **LLM SDK:** OpenAI Python SDK
+- **LLM SDK:** `google-genai` Python SDK
 - **Validation:** Pydantic
 - **Containerization:** Docker + Docker Compose
 
@@ -61,7 +61,7 @@ This project provides a modular backend that:
 - PostgreSQL
 - Redis
 - Qdrant
-- OpenAI API key
+- Gemini API key
 
 ### 2) Clone and Install
 
@@ -92,8 +92,8 @@ REDIS_URL=redis://localhost:6379/0
 QDRANT_URL=http://localhost:6333
 QDRANT_COLLECTION=documents
 
-OPENAI_API_KEY=your_openai_api_key
-OPENAI_CHAT_MODEL=gpt-4o-mini
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_MODEL=models/gemini-2.5-flash
 ```
 
 ### 4) Run the API (Local)
